@@ -1,0 +1,23 @@
+.Home {
+    width: 100%;
+    height: 1000px;
+    position: relative;
+    background: black;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    width: 320px;
+    height: 1000px;
+    background: blue;
+    position: absolute;
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    background: red;
+    font-size: 30px;
+    padding-top: 10px;
+}
