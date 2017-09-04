@@ -44,3 +44,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.test {
+    text-decoration: line-through;
+    display: none;
+}
