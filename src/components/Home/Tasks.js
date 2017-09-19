@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {completeTask} from './../../ducks/tasks.js'
+import {completeTask} from './../../ducks/tasks.js';
+import {deleteTask} from './../../ducks/tasks.js';
 
 class Tasks extends Component {
     constructor(props) {
@@ -16,6 +17,10 @@ class Tasks extends Component {
 
     completeTask(i){
         this.props.completeTask(i)
+    }
+
+    deleteTask(i){
+        this.props.deleteTask(i)
     }
 
     render() {
@@ -42,4 +47,4 @@ function mapStateToProps(state){
     return state
 }
 
-export default connect(mapStateToProps, {completeTask})(Tasks);
+export default connect(mapStateToProps, {completeTask, deleteTask})(Tasks);

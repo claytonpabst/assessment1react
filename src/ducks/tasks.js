@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const ADD_TASK = 'ADD_TASK';
-const REMOVE_TASK = 'REMOVE_TASK'
+const DELETE_TASK = 'DELETE_TASK'
 const COMPLETE_TASK = 'COMPLETE_TASK'
 
 export default function reducer(state = initialState, action) {
@@ -24,6 +24,10 @@ export default function reducer(state = initialState, action) {
                     taskList:newTaskList
                 }
             );
+
+        case DELETE_TASK:
+            newTaskList.splice(action.payload, 1)
+            return Object.assign({},state,{taskList:newTaskList})
         
         case COMPLETE_TASK:
             newTaskList[action.payload].checked = true
@@ -33,7 +37,7 @@ export default function reducer(state = initialState, action) {
                 {
                     taskList:newTaskList
                 }
-            )
+            );
 
         default:
             return state;
@@ -50,6 +54,13 @@ export function addTask(newTask){
 export function completeTask(i){
     return {
         type: COMPLETE_TASK,
+        payload: i
+    }
+}
+
+export function deleteTask(i){
+    return {
+        type: DELETE_TASK,
         payload: i
     }
 }
