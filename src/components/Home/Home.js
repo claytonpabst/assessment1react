@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Tasks from './Tasks.js'
 import './Home.css';
+import {connect} from 'react-redux'
+import {addTask} from './../../ducks/tasks.js'
 
 
 class Home extends Component {
@@ -8,45 +10,47 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      taskList: [
-                  {task:'Finish React Test', checked: false},
-                  {task:'Do This', checked: false},
-                  {task:'Do That', checked: false}
-                ],
+      // taskList: [
+      //             {task:'Finish React Test', checked: false},
+      //             {task:'Do This', checked: false},
+      //             {task:'Do That', checked: false}
+      //           ],
       input: ''
     } 
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.completeTask = this.completeTask.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
+    // this.completeTask = this.completeTask.bind(this);
+    // this.deleteTask = this.deleteTask.bind(this);
 
   }
 
-  completeTask(i) {
-    let taskList = [...this.state.taskList]
-    taskList[i].checked = true;
-    this.setState({
-      taskList: taskList
-    })
-  }
+  // completeTask(i) {
+  //   let taskList = [...this.state.taskList]
+  //   taskList[i].checked = true;
+  //   this.setState({
+  //     taskList: taskList
+  //   })
+  // }
 
-  deleteTask(i) {
-    let taskList = [...this.state.taskList]
-    taskList.splice(i, 1)
-    this.setState({
-      taskList: taskList
-    })
-  }
+  // deleteTask(i) {
+  //   let taskList = [...this.state.taskList]
+  //   taskList.splice(i, 1)
+  //   this.setState({
+  //     taskList: taskList
+  //   })
+  // }
 
   handleClick() {
     if(this.state.input === '') {
       return
     }
-      let taskList = [... this.state.taskList]
-      taskList.push({task: this.state.input, checked: false})
+    // console.log('hit')
+    console.log(this.props)
+    this.props.addTask(this.state.input)
+    //   let taskList = [... this.state.taskList]
+    //   taskList.push({task: this.state.input, checked: false})
     this.setState({
-      taskList: taskList,
       input: ''
     })
   }
@@ -87,7 +91,7 @@ class Home extends Component {
           </div>
           <div style={styles}>
             {/*{ taskList }*/}
-            <Tasks tasks={this.state.taskList} deleteTask={this.deleteTask} completeTask={this.completeTask}/>
+            <Tasks />
           </div>
           <div>
             <button></button>
@@ -100,5 +104,10 @@ class Home extends Component {
 
 }
 
+// function mapStateToProps(state){
+//   return {
+//     taskList: state.taskList
+//   }
+// }
 
-export default Home;
+export default connect(null, {addTask})(Home);

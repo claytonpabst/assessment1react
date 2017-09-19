@@ -1,11 +1,5 @@
 import {createStore} from 'redux';
+import reducer from './tasks.js';
 
-function reducer(state) {
-    return state;
-}
 
-let initialState = {
-    tasks: []
-}
-
-export default createStore(reducer, initialState);
+export default createStore(reducer);

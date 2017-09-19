@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {completeTask} from './../../ducks/tasks.js'
 
 class Tasks extends Component {
     constructor(props) {
@@ -9,11 +11,16 @@ class Tasks extends Component {
         }
 
         
-        // this.completeTask = this.completeTask.bind(this);
+        this.completeTask = this.completeTask.bind(this);
+    }
+
+    completeTask(i){
+        this.props.completeTask(i)
     }
 
     render() {
-        let tasks = this.props.tasks.map( (task, i) => {
+        console.log(this.props)
+        let tasks = this.props.taskList.map( (task, i) => {
             return (
                 <div key={i}>
                     <p style={task.checked ? {"textDecoration":"line-through"}: null}>{task.task}</p>
@@ -29,9 +36,10 @@ class Tasks extends Component {
             </div>
         )
     }
-
-
- 
 }
 
-export default Tasks
+function mapStateToProps(state){
+    return state
+}
+
+export default connect(mapStateToProps, {completeTask})(Tasks);
