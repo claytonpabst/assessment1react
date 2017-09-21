@@ -1,19 +1,32 @@
+import * as service from '../services/service.js'
+
 const initialState = {
     taskList: [                  
         {task:'Finish React Test', checked: false},
         {task:'Do This', checked: false},
         {task:'Do That', checked: false},
         {task:'Finish React', checked: false}
-    ]
+    ],
+    tasks: [],
+    loading: false
 }
 
+const GET_TASKS = 'GET_TASKS';
+const GET_TASKS_PENDING = 'GET_TASKS_PENDING';
+const GET_TASKS_FULFILLED = 'GET_TASKS_FULFILLED';
 const ADD_TASK = 'ADD_TASK';
-const DELETE_TASK = 'DELETE_TASK'
-const COMPLETE_TASK = 'COMPLETE_TASK'
+const DELETE_TASK = 'DELETE_TASK';
+const COMPLETE_TASK = 'COMPLETE_TASK';
 
 export default function reducer(state = initialState, action) {
         let newTaskList = [...state.taskList]
     switch(action.type){
+        case GET_TASKS_PENDING:
+            return Object.assign({}, state, {loading: true})
+
+        case GET_TASKS_FULFILLED:
+            return Object.assign({}, state, {loading: false, tasks: action.payload})
+
         case ADD_TASK:
             console.log('hit')
             newTaskList.push({task:action.payload, checked:false})
@@ -41,6 +54,13 @@ export default function reducer(state = initialState, action) {
 
         default:
             return state;
+    }
+}
+
+export function getTasks() {
+    return {
+        type: GET_TASKS,
+        payload: service.getTasks()
     }
 }
 
