@@ -17,12 +17,12 @@ class Tasks extends Component {
         this.completeTask = this.completeTask.bind(this);
     }
 
-    completeTask(i){
-        this.props.completeTask(i)
+    completeTask(id){
+        this.props.completeTask(id)
     }
 
-    deleteTask(i){
-        this.props.deleteTask(i)
+    deleteTask(id){
+        this.props.deleteTask(id)
     }
 
     componentDidMount(){
@@ -30,16 +30,15 @@ class Tasks extends Component {
     }
 
     render() {
-        console.log(this.props.tasks)
-        
+
         let tasks = this.props.tasks.map( (task, i) => {
             let detailsID = `/details/${task.id}`
 
             return (
                 <div key={i}>
                     <p style={task.completed ? {"textDecoration":"line-through"}: null}>{task.title}</p>
-                    <button style={task.completed ? {"display":"none"}: null}onClick={ () => this.props.completeTask(i)}>complete</button>
-                    <button onClick={ () => this.props.deleteTask(i)}>delete</button>
+                    <button style={task.completed ? {"display":"none"}: null}onClick={ () => this.props.completeTask(task.id)}>complete</button>
+                    <button onClick={ () => this.props.deleteTask(task.id)}>delete</button>
                     <Link to={detailsID}><button>details</button></Link>
                 </div>
             )
@@ -55,8 +54,7 @@ class Tasks extends Component {
 
 function mapStateToProps(state){
     return {
-        tasks: state.tasks,
-        loading: state.loading
+        tasks: state.tasks
     }
 }
 

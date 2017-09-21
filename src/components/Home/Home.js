@@ -46,7 +46,7 @@ class Home extends Component {
       return
     }
     // console.log('hit')
-    console.log(this.props)
+    // console.log(this.props)
     this.props.addTask(this.state.input)
     //   let taskList = [... this.state.taskList]
     //   taskList.push({task: this.state.input, checked: false})
